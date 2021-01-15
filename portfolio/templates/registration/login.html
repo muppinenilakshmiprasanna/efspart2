@@ -10,11 +10,11 @@
     <form method="post" action="{% url 'login' %}" >
         {{ form|crispy }}
         {% csrf_token %}
-        <p><input type="submit" value="Login"/></p>
+        <p><input type="submit"  class="btn btn-success" value="Login"/></p>
 
           </form>
             <br/>
-        <p><a href="{% url 'password_reset' %}">Forgotten your  password?</a></p>
+        <p><a href="{% url 'password_reset' %}" class="lead" >Forgotten your  password?</a></p>
 
 {% endblock %}
 

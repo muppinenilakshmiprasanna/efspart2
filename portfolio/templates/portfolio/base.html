@@ -1,139 +1,139 @@
 {% load static %}
+
 <html lang="en">
 <head>
+<title>Eagle Financial Services</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Eagle Financial Services</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="{% static 'fusioncharts/fusioncharts.js' %}"></script>
-    <script type="text/javascript" src="{% static 'fusioncharts/themes/fusioncharts.theme.fint.js' %}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'css/portfolio.css' %}">
-
 </head>
-<style>
-   .navbar {
+
+ <style>
+      .navbar {
         margin-bottom: 0;
         border-radius: 0;
     }
-    .row .col-md-6 .card {
-        background: rgb(0, 0, 0);
-        background: rgba(0, 0, 0, 0.1);
-        color: black;
-    }
 
-    .container .row .col-md-12 .card {
+       .container .row .col-md-12 .card {
         background: rgb(0, 0, 0);
         background: rgba(0, 0, 0, 0.1);
-        color: black;
+        color: blue;
     }
-    .row .table{
+      .table{
         width : 165%;
         table-layout: fixed;
         border-collapse: collapse;
         word-wrap: break-word;
     }
-    .content {
+       .content {
         padding-left: 8px;
     }
 
-        body,html{
-            height: 100%;
-            margin: 0;
-            background: #7F7FD5;
-            background: -webkit-linear-gradient(to right, #ffffff, #ffffff);
-            background: linear-gradient(to right, #ffffff, #de9404);
-        }
-        #events_card{
-            padding-bottom: 40px;
-        }
 
-
-</style>
-
+    </style>
 <body>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark mb-4">
-    <a href="/" class="navbar-brand">Eagle Financial Services</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            {% if user.is_authenticated and user.is_superuser  or user.groups.all.0.name == "Advisor" %}
-            <li class="nav-item active"><a class=nav-link href="/">Home</a></li>
-            <li class="nav-item active"><a class=nav-link href="{% url 'portfolio:customer_list' %}">Customers</a></li>
-            <li class="nav-item active"><a class=nav-link href="{% url 'portfolio:investment_list' %}">Investment</a></li>
-            <li class="nav-item active"><a class=nav-link href="{% url 'portfolio:stock_list' %}">Stocks</a></li>
-            {% endif %}
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-            {% if user.is_authenticated %}
-            <ul class="navbar-nav">
-                <li class="nav-item dropdown">
+        <a href="/" class="navbar-brand">Eagle Financial Services</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                 {% if user.is_authenticated and user.is_superuser  or user.groups.all.0.name == "Advisor" %}
+                <li class="nav-item active"><a class=nav-link href="{% url 'portfolio:home' %}">Home</a></li>
+                <li class="nav-item active"><a class=nav-link href="{% url 'portfolio:customer_list' %}">Customers</a></li>
+                <li class="nav-item active"><a class=nav-link href="{% url 'portfolio:investment_list' %}">Investment</a></li>
+                <li class="nav-item active"><a class=nav-link href="{% url 'portfolio:stock_list' %}">Stocks</a></li>
+                {% endif %}
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                {% if user.is_authenticated %}
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ user.username }}</a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{% url 'password_change' %}">Change password</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{% url 'logout' %}">Log out</a>
                     </div>
-                </li>
+                    </li>
             </ul>
-            {% else %}
-            <form class="form-inline my-2 my-lg-0">
-                <a href="{% url 'login' %}" class="btn btn-outline-secondary">Log In</a>
-                <a href="{% url 'portfolio:register' %}" class="btn btn-primary ml-2">Sign Up</a>
-            </form>
-            {% endif %}
-        </ul>
-    </div>
+
+                {% else %}
+                <form class="form-inline my-2 my-lg-0">
+                    <a href="{% url 'login' %}" class="btn btn-outline-secondary">Log In</a>
+                    <a href="{% url 'portfolio:register' %}" class="btn btn-primary ml-2">Sign Up</a>
+                </form>
+                {% endif %}
+
+            </ul>
+        </div>
 </nav>
 <div class="content container">
     <div class="row">
         <div class="col-md-8">
             {% block content %}
-            <div class="links">
-                <!-- Example row of columns -->
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="thumbnail">
-                            <img src="{% static 'images/customers.jpg' %}" alt="customers"/>
-                            <div class="caption">
-                                <h2>Customer</h2>
-                                <p>We see our success in our customers success, it gives us an immense pleasure when our advises turn out to be fruitful. </p>
-                                {% if user.is_authenticated %}
-                                <p><a class="btn btn-default" href="{% url 'portfolio:customer_list' %}" role="button">View details &raquo;</a></p>
-                                {% endif %}
+                <div class="links">
+                    <!-- Example row of columns -->
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="thumbnail">
+                                <img src="{% static 'images/customers.jpg' %}" alt="customers"/>
+                                <div class="caption">
+                                    <h2>Customer</h2>
+                                    <p>We see our success in our customers success, it gives us an immense pleasure when
+                                        our
+                                        advises
+                                        turn out to be fruitful. </p>
+                                    {% if user.is_authenticated %}
+                                        <p><a class="btn btn-default" href="{% url 'portfolio:customer_list' %}"
+                                              role="button">View
+                                            details &raquo;</a></p>
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="thumbnail">
-                            <img src="{% static 'images/nonstock.jpg' %}" alt="non-stock"/>
-                            <div class="caption">
-                                <h2>Non-Stock Investments</h2>
-                                <p>Our team also provides advice for Non-Stock investments.</p>
-                                <p><a class="btn btn-default" href="{% url 'portfolio:investment_list' %}" role="button">View details &raquo;</a></p>
+                        <div class="col-md-3">
+                            <div class="thumbnail">
+<img src="{% static 'images/nonstock.jpg' %}" alt="non-stock"/>
+                                <div class="caption">
+                                    <h2>Non-Stock Investments</h2>
+                                    <p>Our team also provides advice for Non-Stock investments.</p>
+                                    <p><a class="btn btn-default" href="{% url 'portfolio:investment_list' %}"
+                                           role="button">View
+                                        details &raquo;</a></p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="thumbnail">
-                            <img src="{% static 'images/stocks.jpg' %}" alt="stocks"/>
-                            <div class="caption">
-                                <h2>Stock Portfolio</h2>
-                                <p>Our Stock portfolios vary across industries.</p>
-                                <p><a class="btn btn-default" href="{% url 'portfolio:stock_list' %}" role="button">View details &raquo;</a></p>
+                        <div class="col-md-3">
+                            <div class="thumbnail">
+                                <img src="{% static 'images/stocks.jpg' %}" alt="stocks"/>
+                                <div class="caption">
+                                    <h2>Stock Portfolio</h2>
+                                    <p>Our Stock portfolios vary across industries.</p>
+                                    <p><a class="btn btn-default" href="{% url 'portfolio:stock_list' %}" role="button">View
+                                        details &raquo;</a></p>
+                                </div>
                             </div>
                         </div>
+
+
                     </div>
                 </div>
-            </div>
             {% endblock %}
         </div>
     </div>
 </div>
+
+</div>
+
+
 </body>
+
 </html>

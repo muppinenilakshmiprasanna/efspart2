@@ -1,70 +1,69 @@
+
 {% extends 'portfolio/base.html' %}
 {% load static %}
 {% block content %}
-            {% if user.is_authenticated %}
-                <div class="page-container">
+<body>
 
-                    <h2 class="top-menu">Hello {{ user.username }},</h2>
-                    <p>Please choose from below options.</p>
-
-                </div>
-            {% endif %}
-            <div class="content container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="links">
-                            <!-- Example row of columns -->
-                            <div class="row">
-                                <div class="card-deck">
-
-                                    <div class="card" >
-                                        <img class="card-img-top" src="{% static 'images/customer.jpg' %}" alt="customer" style="height: 200px">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Customer</h5>
-                                                <p class="card-text">We see our success in our customers success, it gives us an immense
-                                                pleasure when our
-                                                advises
-                                                turn out to be fruitful.</p>
-                                               <a class="btn btn-primary" href="{% url 'portfolio:customer_list' %}"
-                                                  role="button">View
-                                                details &raquo;</a>
-                                        </div>
-
-
-
-                                </div>
-
-                                    <div class="card" >
-                                        <img class="card-img-top"  src="{% static 'images/nonstock.jpg' %}" alt="non-stock" style="height: 200px">
-                                           <div class="card-body">
-                                            <h5 class="card-title">Non-Stock Investments</h5>
-                                                <p class="card-text">Our team also provides advises for Non-Stock investments.</p>
-                                                <a class="btn btn-primary" href="{% url 'portfolio:investment_list' %}"
-                                                  role="button">View
-                                                details &raquo;</a>
-
-                                        </div>
-                                    </div>
-
-
-
-                                    <div class="card" >
-                                        <img class="card-img-top"  src="{% static 'images/stocks.jpg' %}" alt="stocks" style="height: 200px">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Stocks</h5>
-                                                <p class="card-text">Our Stock portfolios vary across industries.</p>
-                                                <a class="btn btn-primary" href="{% url 'portfolio:stock_list' %}"
-                                                  role="button">View
-                                                details &raquo;</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">Welcome!</div>
+                    <p class="card-text">
+                    {% if user.is_authenticated %}
+                        <p class="lead"><b>Hello {{ user.username }},</b></p>
+                        <p>Please choose from below options:</p>
+                    {% endif %}
+                    </p>
                 </div>
             </div>
+        </div>
+    </div>
+
+<div class="container mt-4">
+    <div class="row">
+         <div class="card-deck">
+
+      <div class="col">
+        <div class="fa-credit-card text-center" >
+          <img class="card-img-top" src="{% static 'images/customer.jpg' %}" alt="" style="height: 200px">
+          <div class="card-body">
+            <h4 class="card-title">Customer</h4>
+          </div>
+          <div class="card-footer">
+            <a href="{% url 'portfolio:customer_list' %}" class="btn btn-primary">View Details!</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="fa-credit-card text-center text-nowrap">
+          <img class="card-img-top" src="{% static 'images/nonstock.jpg' %}" alt="" style="height: 200px">
+          <div class="card-body">
+            <h4 class="card-title">Stock Investments</h4>
+          </div>
+          <div class="card-footer">
+            <a href="{% url 'portfolio:investment_list' %}" class="btn btn-primary">View Details</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="fa-credit-card text-center">
+          <img class="card-img-top" src="{% static 'images/stocks.jpg' %}" alt="" style="height: 200px">
+          <div class="card-body">
+            <h4 class="card-title">Stocks</h4>
+          </div>
+          <div class="card-footer">
+            <a href="{% url 'portfolio:stock_list' %}" class="btn btn-primary">View Details</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+</div>
+</div>
     </body>
-    </html>
+
 {% endblock %}

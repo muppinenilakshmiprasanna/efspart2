@@ -1,9 +1,13 @@
-
 body {
-    padding-left: 15px;
+    background-image: url(../images/bp1.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    font-family: "Comic Sans MS", serif;
+    font-size: medium;
 }
-
 h1 a {
     color: #FCA205;
     font-family: 'cursive';
 }
+

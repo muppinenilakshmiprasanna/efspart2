@@ -3,25 +3,30 @@
 <html>
 <body>
 
-<style>
 
-        body {
-            background-color: beige;
-        }
-</style>
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">Welcome!</div>
+                    <p class="card-text">
+                    Eagle Financial Services, your Midwest Financial Services Partner
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-  <header class="jumbotron my-4 table-responsive" style="background: white">
-      <p class="lead text-nowrap"><b>Eagle Financial Services, your Midwest Financial Services Partner</b></p>
-         </header>
 
 <div class="row"><br>
 
     <h2 style="padding-left: 15Px"><u>Customer Information</u></h2>
-    </div>
+</div>
     <div>
         <table class="table table-hover table-responsive-lg text-center">
             <thead>
-            <tr bgcolor="white">
+           <tr class="bg-warning">
                 <th>Customer Number</th>
                 <th>Name</th>
                 <th>Address</th>
@@ -68,6 +73,5 @@
         {% endif %}
 
     </div>
- </body>
-</html>
+</div>
 {% endblock %}
