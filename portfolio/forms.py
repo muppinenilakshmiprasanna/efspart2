@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
-from .models import Customer, Stock, Investment
+from .models import Customer, Stock, Investment, Mails
 
 
 class CustomerForm(forms.ModelForm):
@@ -44,3 +44,14 @@ class RegisterForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'email','first_name','last_name', 'password1', 'password2',)
+
+
+class EmailForm(forms.ModelForm):
+    email = forms.EmailField(max_length=200,
+                             widget=forms.TextInput(attrs={'class': "form-control", 'id': "clientemail"}))
+    message = forms.CharField(widget=forms.Textarea(attrs={'class': "form-control"}))
+    subject = forms.CharField(widget=forms.TextInput(attrs={'class': "form-control"}))
+
+    class Meta:
+        model = Mails
+        fields = ('email', 'subject', 'message', 'document',)

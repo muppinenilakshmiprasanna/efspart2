@@ -1,9 +1,12 @@
 from django.db import models
 
 from django.utils import timezone
-
+import requests
 
 # Create your models here.
+from django.utils.timezone import now
+
+
 class Customer(models.Model):
     name = models.CharField(max_length=50)
     address = models.CharField(max_length=200)
@@ -70,3 +73,44 @@ class Stock(models.Model):
 
     def initial_stock_value(self):
         return self.shares * self.purchase_price
+
+    """def current_stock_price(self):
+        symbol_f = str(self.symbol)
+        main_api = 'http://api.marketstack.com/v1/eod?'
+        api_key = 'access_key=8b5157164922dbbaa3baf941f40a0515&limit=1&symbols='
+        url = main_api + api_key + symbol_f
+        json_data = requests.get(url).json()
+        open_price = float(json_data["data"][0]["open"])
+        share_value = open_price
+        return share_value"""
+
+    def current_stock_value(self):
+        return float(self.current_stock_price()) * float(self.shares)
+
+    def current_stock_price(self):
+        symbol_f = str(self.symbol)
+        main_api = 'https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol='
+        api_key = '&interval=1min&apikey=Y1W6R2MYU1QPN0P6'
+        url = main_api + symbol_f + api_key
+        print("url", url)
+        json_data = requests.get(url).json()
+        open_price = float(json_data["Global Quote"]["02. open"])
+        share_value = open_price
+        return share_value
+
+
+class Mails(models.Model):
+    email = models.EmailField()
+    subject = models.CharField(max_length=1000)
+    message = models.CharField(max_length=20000)
+    document = models.FileField(upload_to='documents/')
+
+    def __str__(self):
+        return self.email
+
+
+
+
+
+
+
