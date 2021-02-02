@@ -19,6 +19,8 @@ from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView
     PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 from django.urls import path, include, re_path
 from django.contrib.auth import views
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -45,4 +47,4 @@ urlpatterns = [
     re_path(r'^accounts/password/change/done/$',PasswordChangeDoneView.as_view(template_name='registration/change-password-done.html'),
             name='password_change_done'),
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

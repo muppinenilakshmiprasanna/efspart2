@@ -296,7 +296,7 @@ def downloadpdf(request,pk):
         print(customername)
         customername1 = customername.replace(" ", "_")
         print(customername1)
-        filename = 'Portfolio_' + str(customername1) + '.pdf'
+        filename = 'Portfolio_' + str(customername) + '.pdf'
         content = "inline; filename=%s" % filename
         download = request.GET.get("download")
         if download:
@@ -448,15 +448,15 @@ def email(request, pk):
             subject = request.POST.get('subject')
             message = request.POST.get('message')
             document = request.FILES.get('document')
-            print(document)
             email_from = 'djangotestformasters@gmail.com'
             recipient_list = [emailto]
             emailtosend = EmailMessage(subject, message, email_from, recipient_list)
-            base_dir = 'media/documents'
-            emailtosend.attach_file('media/documents/'+str(document))
+            #base_dir = 'media/documents'
+            emailtosend.attach(document.name, document.read(), document.content_type)
+            #emailtosend.attach_file('media/documents/'+str(document))--is not working when there is spaces in tHE file documnet
             emailtosend.send()
             return render(request, 'portfolio/sent.html')
     else:
         #form = EmailForm(initial={'email': customer.email})
         form = EmailForm()
-    return render(request, 'portfolio/email.html', {'emailform': form})
+    return render(request, 'portfolio/email.html', {'form': form})

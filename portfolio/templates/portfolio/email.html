@@ -2,30 +2,31 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
-<form method="POST" class="post-form form-horizontal" enctype="multipart/form-data">{% csrf_token %}
+<form method="POST" class="post-form form-horizontal" enctype="multipart/form-data">
+  {% csrf_token %}
     <h3 style="margin-bottom: 20px;color:#a3b745 ">Send Email</h3>
       <div class="form-group">
-        {{ emailform.email.errors }}
-        <label class="control-label col-sm-2" for="{{ emailform.email.id_for_label }}">Email Id</label>
-        <div class="col-sm-5">{{ emailform.email }}</div>
+        {{ form.email.errors }}
+        <label class="control-label col-sm-2" >Email Id</label>
+        <div class="col-sm-5">{{ form.email }}</div>
         <div class="clear"></div>
       </div>
       <div class="form-group">
-        {{ emailform.subject.errors }}
-        <label class="control-label col-sm-2" for="{{ form.subject.id_for_label }}">Subject</label>
-        <div class="col-sm-5">{{ emailform.subject }}</div>
+        {{ form.subject.errors }}
+        <label class="control-label col-sm-2" >Subject</label>
+        <div class="col-sm-5">{{ form.subject }}</div>
         <div class="clear"></div>
       </div>
       <div class="form-group">
-        {{ emailform.document.errors }}
-        <label class="control-label col-sm-2" for="{{ form.document.id_for_label }}">Document</label>
-        <div class="col-sm-5">{{ emailform.document }}</div>
+        {{ form.document.errors }}
+        <label class="control-label col-sm-2" >Document</label>
+        <div class="col-sm-5">{{ form.document }}</div>
         <div class="clear"></div>
       </div>
       <div class="form-group">
-        {{ emailform.message.errors }}
-        <label class="control-label col-sm-2" for="{{ form.message.id_for_label }}">Message</label>
-        <div class="col-sm-5">{{ emailform.message}}</div>
+        {{ form.message.errors }}
+        <label class="control-label col-sm-2" >Message</label>
+        <div class="col-sm-5">{{ form.message}}</div>
         <div class="clear"></div>
       </div>
       <div class="form-group">
